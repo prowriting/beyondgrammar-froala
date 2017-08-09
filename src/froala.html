@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ProWritingAid - Realtime Grammar Checking for Froala</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Create a tag that we will use as the editable area. -->
+    <!-- You can use a div tag as well. -->
+    <div spellcheck="false" style="width:1000px; margin:0 auto;" id="contenteditable">
+        <p>
+            Novalk Djokovic is set to miss the US Open after one of his doctors made an announcement that he will need six to
+            twelve weeks to recovers from a elbow injury.
+        </p>
+
+        <p>
+            But Andy Murrey's chances of playing at Flushing Meadows would appear more positive, with the Scot continuing his
+            rehabilitation from a hip problem.
+        </p>
+
+        <p>
+            The last grandslam of the year starts in just under five weeks on August 28, meaning Djokovic will run out of time
+            if the latest assessment is correct.
+        </p>
+
+        <p>
+            <b>Injured Djokovic starting to consider a break away from tennis</b><br />The 12-time major champion was forced to retire injured
+            during his Wimbeldon quarter-final against Tomas Berdych earlier this month and said after the match that he
+            had been feeling pain in his right elbow for over a year and a half. According to his physio its not doing very
+            well. If he does return he will be more likely to injure it again.
+        </p>
+
+        <p>
+            He has since been seeking advice from specialists, including Serbian doctor Zdenko Milinkovic, who said Djokovic
+            is suffering from a "bruised bone due to excessive playing".
+        </p>
+
+        <p>"Nole must rest for six to 12 weeks," Milinkovic told Sportski Zurnal, a sports newspaper in Serbia.</p>
+
+        <p>
+            The next examination will know wether this asdsessment stays or changes. During this period, he is not going to train
+            with a racket but he will run other sessions, such as fitness and the like.
+        </p>
+    </div>
+    <div spellcheck="false" style="width:1000px; margin:0 auto;"  id="contenteditable2">I want to analyze this and categorise it to see the difference between UK and US spelling.</div>
+
+    <!-- Include external JS libs. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.4/js/froala_editor.pkgd.min.js"></script>
+
+    <script src="realtime-grammar-plugin.js"></script>
+    <!-- Initialize the editor. -->
+	<script>
+        //$.FroalaEditor.DEFAULTS.
+        var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'rtg-switcher'];
+        $(function () {
+            $('#contenteditable').froalaEditor({
+                toolbarButtons: buttons,
+                toolbarButtonsMD: buttons,
+                toolbarButtonsSM: buttons,
+                toolbarButtonsXS: buttons,
+                height: 600,
+                width: 1000,
+                spellcheck: false,
+				rtgOptions: {
+					languageFilter: ['en-US','en-GB']
+				},
+				rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+        });
+
+        $('#contenteditable2').froalaEditor({
+                toolbarButtons: buttons,
+                toolbarButtonsMD: buttons,
+                toolbarButtonsSM: buttons,
+                toolbarButtonsXS: buttons,
+                height: 600,
+                width: 1000,
+                spellcheck: false,
+				rtgOptions: {
+					languageFilter: ['en-US','en-GB']
+				},
+				rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+        });
+    });
+
+    </script>
+
+
+</body>
+
+</html>
