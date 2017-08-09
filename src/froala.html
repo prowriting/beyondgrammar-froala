@@ -15,12 +15,15 @@
     <!-- Include Editor style. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <!-- Create a tag that we will use as the editable area. -->
+<!-- Create a tag that we will use as the editable area. -->
+<div id="container" style="width: 100%; max-width: 1000px; margin-left: auto; margin-right: auto;">
     <!-- You can use a div tag as well. -->
-    <div spellcheck="false" style="width:1000px; margin:0 auto;" id="contenteditable">
+    <div spellcheck="false" style="width: 100%; margin:0 auto;" id="contenteditable">
         <p>
             Novalk Djokovic is set to miss the US Open after one of his doctors made an announcement that he will need six to
             twelve weeks to recovers from a elbow injury.
@@ -55,52 +58,54 @@
             with a racket but he will run other sessions, such as fitness and the like.
         </p>
     </div>
-    <div spellcheck="false" style="width:1000px; margin:0 auto;"  id="contenteditable2">I want to analyze this and categorise it to see the difference between UK and US spelling.</div>
+    <div spellcheck="false" style="width: 100%; margin:0 auto;" id="contenteditable2">I want to analyze this and categorise it to see US vs UK spelling changes.</div>
+</div>
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
-    <!-- Include external JS libs. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.4/js/froala_editor.pkgd.min.js"></script>
 
-    <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.4/js/froala_editor.pkgd.min.js"></script>
+<script src="realtime-grammar-plugin.js"></script>
 
-    <script src="realtime-grammar-plugin.js"></script>
-    <!-- Initialize the editor. -->
-	<script>
-        //$.FroalaEditor.DEFAULTS.
-        var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'rtg-switcher'];
-        $(function () {
-            $('#contenteditable').froalaEditor({
-                toolbarButtons: buttons,
-                toolbarButtonsMD: buttons,
-                toolbarButtonsSM: buttons,
-                toolbarButtonsXS: buttons,
-                height: 600,
-                width: 1000,
-                spellcheck: false,
-				rtgOptions: {
-					languageFilter: ['en-US','en-GB']
-				},
-				rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+<!-- Initialize the editor. -->
+<script>
+    //$.FroalaEditor.DEFAULTS.
+    var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'rtg-switcher'];
+    var buttonsSm = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', '|', 'rtg-switcher'];
+    $(function () {
+        $('#contenteditable').froalaEditor({
+            toolbarButtons: buttons,
+            toolbarButtonsMD: buttons,
+            toolbarButtonsSM: buttonsSm,
+            toolbarButtonsXS: buttonsSm,
+            height: 600,
+            spellcheck: false,
+            rtgOptions: {
+                languageFilter: ['en-US', 'en-GB'],
+                showContextThesaurus: true
+            },
+            rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
         });
 
         $('#contenteditable2').froalaEditor({
-                toolbarButtons: buttons,
-                toolbarButtonsMD: buttons,
-                toolbarButtonsSM: buttons,
-                toolbarButtonsXS: buttons,
-                height: 600,
-                width: 1000,
-                spellcheck: false,
-				rtgOptions: {
-					languageFilter: ['en-US','en-GB']
-				},
-				rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+            toolbarButtons: buttons,
+            toolbarButtonsMD: buttons,
+            toolbarButtonsSM: buttonsSm,
+            toolbarButtonsXS: buttonsSm,
+            height: 600,
+            spellcheck: false,
+            rtgOptions: {
+                languageFilter: ['en-US', 'en-GB'],
+                showContextThesaurus: true
+            },
+            rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
         });
     });
 
-    </script>
+</script>
 
 
 </body>

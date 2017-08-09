@@ -5,7 +5,8 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.68/dist/bundle.js",
+           // sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.68/dist/bundle.js",
+            sourcePath : "//localhost:8080/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -22,12 +23,12 @@ require('style!css!./styles/froala-plugin-styles.css');
     };
 
     let getOptionsHtml = ()=>{
-        if (!checker) {
+        if (!checker || checker.length==0) {
             return '<ul class="fr-dropdown-list" role="presentation"><li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="v1" title="Option 1" aria-selected="false">Option 22354</a></li><li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="v2" title="Option 2" aria-selected="false">Option 2</a></li></ul>';
         }
 
         var html = '<ul class="fr-dropdown-list" role="presentation">';
-        var languages = checker
+        var languages = checker[0]
             .getAvailableLanguages();
         if (languages) {
             languages.filter((elem)=> {
@@ -60,12 +61,14 @@ require('style!css!./styles/froala-plugin-styles.css');
     window.addEventListener(
         "pwa-language-change",
         (event) => {
-            var settings = checker.getSettings();
-            // clone the settings
-            settings = JSON.parse(JSON.stringify(settings));
-            settings.languageIsoCode=(<any>event).detail.language;
-            checker.setSettings(settings);
-
+            checker.forEach((c)=>{
+                var settings = c.getSettings();
+                // clone the settings
+                settings = JSON.parse(JSON.stringify(settings));
+                console.log('Changing language from: '+settings.languageIsoCode+" to "+(<any>event).detail.language);
+                settings.languageIsoCode=(<any>event).detail.language;
+                c.setSettings(settings);
+            });
             },
         false);
 
@@ -73,7 +76,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     // or from a cookie
     let browserLanguage = (<any>window.navigator).userLanguage || window.navigator.language;
     let language = browserLanguage=="en-GB"?'en-GB':'en-US';
-    let checker = null;
+    let checker = [];
 
     $.FroalaEditor.DefineIconTemplate('rtg', '<i class="rtg-toolbar-icon"></i>');
     $.FroalaEditor.DefineIcon('rtg-icon', { NAME: 'icon', template : "rtg"});
@@ -194,6 +197,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 var event = document.createEvent('CustomEvent');
 
 				// Define that the event name is 'build'.
+                console.log('Init language change event');
                 event.initCustomEvent('pwa-language-change', true, true, {
                     language: val
                 });
@@ -208,7 +212,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 plugin.checker = new window["Pwa"].GrammarChecker(editor.$el[0], settings.service);
 
                 plugin.checker.setSettings(settings.grammar);
-                checker = plugin.checker;
+                checker.push(plugin.checker);
                 
                 plugin.checker.onConnectionChange = (status)=>{
                     plugin.setState(status);
