@@ -13,7 +13,7 @@ module.exports = {
     debug: true,
 
     output: {
-        path : path.resolve('build'),
+        path : path.resolve('dist'),
         filename: '[name].js',
         chunkFilename: '[id].chunk.js'
     },
@@ -39,7 +39,6 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: './src/froala.html', to: './' },
             { context : './src', from: {glob : './icons/**/*'}, to:'./' },
-            { from : "./bundle/bundle.js", to : "./"}
         ])
     ],
 
