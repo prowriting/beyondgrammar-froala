@@ -34,7 +34,6 @@ require('style!css!./styles/froala-plugin-styles.css');
                 if (!settings.grammar.languageFilter) {
                     return true;
                 } else {
-                    console.log(settings.grammar.languageFilter);
                     if (settings.grammar.languageFilter.indexOf(elem.isoCode) >= 0) {
                         return true;
                     }
@@ -119,7 +118,6 @@ require('style!css!./styles/froala-plugin-styles.css');
             checker : null,
             
             _init : ()=>{
-                console.log (editor.opts.myOption);
                 if (editor.opts){
                     if (editor.opts.rtgOptions){
                         settings.grammar = editor.opts.rtgOptions;
@@ -190,7 +188,6 @@ require('style!css!./styles/froala-plugin-styles.css');
                     settings.checkerIsEnabled=true;
                     plugin.checker.setSettings(settings);
                 }
-                console.log('Settings language to: '+val);
                 language = val;
 
                 // Create the event.
