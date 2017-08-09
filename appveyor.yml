@@ -26,7 +26,7 @@ build_script:
   - npm run build:CI  
   
 artifacts:
-  - path: bundle/bundle.js
+  - path: dist/realtime-grammar-plugin.js
 
 notifications:
 - provider: Slack
@@ -44,6 +44,6 @@ deploy:
     secure: gzyqglVhkink16D5LDmANUnHDoe/yvOCDWr79JlBDX5pSf6ewKBwGr1ttNd0a08+J/rQbyEmXw8mLxDLoBJwrFxYqsZQIMEhcR7chDy5p2aNK+wA5IxmI2NFwtW8LaWb
   container: cdn
   folder: $(APPVEYOR_PROJECT_SLUG)\$(APPVEYOR_BUILD_VERSION)
-  artifact: bundle/bundle.js
+  artifact: dist/realtime-grammar-plugin.js
   unzip: false
   set_content_type:  true
