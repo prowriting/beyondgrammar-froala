@@ -15,6 +15,6 @@ Our state-of-the-art grammar checker is used by over 500,000 users. It contains 
 - Contextual thesaurus. Our contextual thesaurus looks at the context of the word you want to look up. It then limits the suggestions to just those so you can quickly pick the right synonym. There's also a full thesaurus option if you prefer that.
 
 ## Integration demo
-### NOTE: You will need to register to get a API key first (FREE for Individuals)!
+### NOTE: You will need to <a href="prowritingaid.com" target="_blank">register</a> to get a API key first (FREE for Individuals)!
 
-<a href="https://jsfiddle.net/4jxr3mfx/17/">JSFiddle Integration Demo</a>
+<a href="https://jsfiddle.net/4jxr3mfx/19/" target="_blank">JSFiddle Integration Demo</a>
