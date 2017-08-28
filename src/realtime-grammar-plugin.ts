@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.96/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.101/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -64,7 +64,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 var settings = c.getSettings();
                 // clone the settings
                 settings = JSON.parse(JSON.stringify(settings));
-                console.log('Changing language from: '+settings.languageIsoCode+" to "+(<any>event).detail.language);
+                //console.log('Changing language from: '+settings.languageIsoCode+" to "+(<any>event).detail.language);
                 settings.languageIsoCode=(<any>event).detail.language;
                 c.setSettings(settings);
             });
@@ -150,6 +150,14 @@ require('style!css!./styles/froala-plugin-styles.css');
                     let $html = $('<div>'+html+'</div>');
                     $html.find('.pwa-mark,.pwa-mark-done').contents().unwrap();
                     return $html.html();
+                });
+
+                editor.events.on('commands.after', (command) => {
+                    console.log('Command '+command);
+                    if (command == 'html'){
+                        // force a check in case they've just returned from code view
+                        plugin.checker.checkAll();
+                    }
                 });
 
                 plugin.setState("loading");
