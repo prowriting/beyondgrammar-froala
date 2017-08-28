@@ -153,7 +153,6 @@ require('style!css!./styles/froala-plugin-styles.css');
                 });
 
                 editor.events.on('commands.after', (command) => {
-                    console.log('Command '+command);
                     if (command == 'html'){
                         // force a check in case they've just returned from code view
                         plugin.checker.checkAll();
