@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<a href="#" id="gethtml">Get Html</a>
 <!-- Create a tag that we will use as the editable area. -->
 <div id="container" style="width: 100%; max-width: 1000px; margin-left: auto; margin-right: auto;">
     <!-- You can use a div tag as well. -->
@@ -102,6 +103,12 @@
                 showContextThesaurus: true
             },
             rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+        });
+
+
+        $('#gethtml').on('click',function(){
+            var html = $('#contenteditable').froalaEditor('html.get');
+            alert(html);
         });
     });
 

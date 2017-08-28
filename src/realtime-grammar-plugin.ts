@@ -98,7 +98,7 @@ require('style!css!./styles/froala-plugin-styles.css');
         },
         // Callback on dropdown show.
         refreshOnShow: function ($btn, $dropdown) {
-            console.log ('do refresh when show');
+            //console.log ('do refresh when show');
             var editorInstance = this,
                 list = $dropdown.find('ul.fr-dropdown-list');
 
@@ -126,7 +126,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                     }
                     if (!settings.grammar.languageIsoCode){
                         settings.grammar.languageIsoCode = language;
-                        console.log('Defaulting checking language to: '+language)
+                        //console.log('Defaulting checking language to: '+language)
                     }
                     if (editor.opts.rtgSourcePath){
                         settings.service.sourcePath = editor.opts.rtgSourcePath;
@@ -144,6 +144,13 @@ require('style!css!./styles/froala-plugin-styles.css');
                         settings.hideDisable = editor.opts.rtgDisableHidden;
                     }
                 }
+
+                editor.events.on('html.get', (html) => {
+                    // clean the html and return the cleaned html
+                    let $html = $('<div>'+html+'</div>');
+                    $html.find('.pwa-mark,.pwa-mark-done').contents().unwrap();
+                    return $html.html();
+                });
 
                 plugin.setState("loading");
                 plugin.loadScript(settings.service.sourcePath, ()=>{
@@ -204,6 +211,7 @@ require('style!css!./styles/froala-plugin-styles.css');
 				// target can be any Element or other EventTarget.
                 window.dispatchEvent(event);
             },
+
 
             activate : ()=>{
                 plugin.setState("loading");
