@@ -99,10 +99,14 @@
             height: 600,
             spellcheck: false,
             rtgOptions: {
-                languageFilter: ['en-US', 'en-GB'],
-                showContextThesaurus: true
-            },
-            rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+                service : {
+                    apiKey : 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
+                },
+                grammar : {
+                    languageFilter: ['en-US', 'en-GB'],
+                    showContextThesaurus: true
+                }
+            }
         });
 
 

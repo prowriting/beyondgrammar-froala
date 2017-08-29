@@ -112,29 +112,26 @@ require('style!css!./styles/froala-plugin-styles.css');
             checker : null,
             
             _init : ()=>{
-                if (editor.opts){
-                    if (editor.opts.rtgOptions){
-                        settings.grammar = editor.opts.rtgOptions;
+                if (editor.opts && editor.opts.rtgOptions){
+                    let opts = editor.opts.rtgOptions;
+                    let grammar = opts.grammar || {};
+                    let service = opts.service || {};
+                    
+                    //Grammar options applying
+                    if (!grammar.languageIsoCode){
+                        grammar.languageIsoCode = language;
                     }
-                    if (!settings.grammar.languageIsoCode){
-                        settings.grammar.languageIsoCode = language;
-                        //console.log('Defaulting checking language to: '+language)
-                    }
-                    if (editor.opts.rtgSourcePath){
-                        settings.service.sourcePath = editor.opts.rtgSourcePath;
-                    }
-                    if (editor.opts.rtgUserId){
-                        settings.service.userId = editor.opts.rtgUserId;
-                    }
-                    if (editor.opts.rtgApiKey){
-                        settings.service.apiKey = editor.opts.rtgApiKey;
-                    }
-                    if (editor.opts.rtgServiceUrl){
-                        settings.service.serviceUrl= editor.opts.rtgServiceUrl;
-                    }
-                    if (editor.opts.rtgDisableHidden){
-                        settings.hideDisable = editor.opts.rtgDisableHidden;
-                    }
+
+                    settings.grammar = grammar;
+
+                    //Service options applying
+                    settings.service.sourcePath = service.sourcePath || settings.service.sourcePath;
+                    settings.service.serviceUrl = service.serviceUrl || settings.service.serviceUrl;
+                    settings.service.userId = service.userId;
+                    settings.service.apiKey = service.apiKey;
+                    
+                    //Froala specific options
+                    settings.hideDisable = (typeof opts.disableHidden == "undefined") ? false : opts.disableHidden;
                 }
 
                 editor.events.on('html.get', (html) => {
