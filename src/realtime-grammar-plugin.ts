@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.101/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.102/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -30,16 +30,8 @@ require('style!css!./styles/froala-plugin-styles.css');
         var languages = checker[0]
             .getAvailableLanguages();
         if (languages) {
-            languages.filter((elem)=> {
-                if (!settings.grammar.languageFilter) {
-                    return true;
-                } else {
-                    if (settings.grammar.languageFilter.indexOf(elem.isoCode) >= 0) {
-                        return true;
-                    }
-                }
-                return false;
-            }).forEach((lang)=> {
+            languages
+                .forEach((lang)=> {
                 var bullet = lang.isoCode == language ? ' •' : '';
                 html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="' + lang.isoCode + '" title="' + lang.displayName + '" aria-selected="false">' + lang.displayName + bullet + '</a></li>';
             });
