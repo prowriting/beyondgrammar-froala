@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.114/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.118/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -149,9 +149,24 @@ require('style!css!./styles/froala-plugin-styles.css');
                 });
 
                 plugin.setState("loading");
-                plugin.loadScript(settings.service.sourcePath, ()=>{
+                if (window["Pwa"] && window["Pwa"].GrammarChecker){
                     plugin.activate();
-                });
+                }
+                else if (window["Pwa-plugins"]){
+                    // the script is still loading
+                    window["Pwa-plugins"].push(plugin);
+                }
+                else {
+                    window["Pwa-plugins"] = [];
+                    window["Pwa-plugins"].push(plugin);
+
+                    plugin.loadScript(settings.service.sourcePath, ()=> {
+                        window["Pwa-plugins"].forEach((p)=>{
+                            p.activate();
+                        });
+                        window["Pwa-plugins"]=null;
+                    });
+                }
             },
             
             onRefreshButton : ($btn)=>{
