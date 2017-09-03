@@ -163,11 +163,13 @@ require('style!css!./styles/froala-plugin-styles.css');
 
                 plugin.setState("loading");
                 if (window["Pwa"] && window["Pwa"].GrammarChecker){
-                    plugin.activate();
+                    //plugin.activate();
+                    plugin.setState("connected");
                 }
                 else if (window["Pwa-plugins"]){
                     // the script is still loading
                     window["Pwa-plugins"].push(plugin);
+                    plugin.setState("connected");
                 }
                 else {
                     window["Pwa-plugins"] = [];
@@ -175,7 +177,8 @@ require('style!css!./styles/froala-plugin-styles.css');
 
                     plugin.loadScript(settings.service.sourcePath, ()=> {
                         window["Pwa-plugins"].forEach((p)=>{
-                            p.activate();
+                            //p.activate();
+                            p.setState("connected");
                         });
                         window["Pwa-plugins"]=null;
                     });
