@@ -5,8 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "http://localhost:8080/bundle.js",
-            //sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.119/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.121/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -127,11 +126,7 @@ require('style!css!./styles/froala-plugin-styles.css');
             checker : null,
             
             _init : ()=>{
-                if (!editor.$el.is(":visible")){
-                    console.log('Not starting RTG as element is not visible: ');
-                }
-                console.log('Starting froala on element: '+editor.$el.attr('name'));
-
+                
                 if (editor.opts && editor.opts.rtgOptions){
                     let opts = editor.opts.rtgOptions;
                     let grammar = opts.grammar || {};
