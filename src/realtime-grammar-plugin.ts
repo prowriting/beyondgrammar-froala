@@ -95,6 +95,19 @@ require('style!css!./styles/froala-plugin-styles.css');
                 list = $dropdown.find('ul.fr-dropdown-list');
 
             $(list).html(getOptionsHtml());
+
+            // if the menu is wider than the editor then
+            // we want to make it right aligned
+            var rightSideOfMenu = $btn.offset().left - $btn.parent().offset().left + $dropdown.width();
+            var parentWidth = $btn.parent().width();
+            if (rightSideOfMenu>parentWidth) {
+                var left = $btn.offset().left - $btn.parent().offset().left - ($dropdown.width() - $btn.outerWidth());
+                $dropdown.hide();
+                setTimeout(()=> {
+                    $dropdown.css('left', left + 'px');
+                    $dropdown.show();
+                }, 1);
+            }
         }
     });
 	
