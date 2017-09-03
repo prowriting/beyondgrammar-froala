@@ -5,7 +5,8 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.119/dist/bundle.js",
+            sourcePath : "http://localhost:8080/bundle.js",
+            //sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.119/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -23,7 +24,8 @@ require('style!css!./styles/froala-plugin-styles.css');
 
     let getOptionsHtml = ()=>{
         if (!checker || checker.length==0) {
-            return '<ul class="fr-dropdown-list" role="presentation"><li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="v1" title="Option 1" aria-selected="false">Option 22354</a></li><li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="v2" title="Option 2" aria-selected="false">Option 2</a></li></ul>';
+            console.log('No checker available');
+            return '<ul class="fr-dropdown-list" role="presentation"></ul>';
         }
 
         var html = '<ul class="fr-dropdown-list" role="presentation">';
@@ -125,6 +127,11 @@ require('style!css!./styles/froala-plugin-styles.css');
             checker : null,
             
             _init : ()=>{
+                if (!editor.$el.is(":visible")){
+                    console.log('Not starting RTG as element is not visible: ');
+                }
+                console.log('Starting froala on element: '+editor.$el.attr('name'));
+
                 if (editor.opts && editor.opts.rtgOptions){
                     let opts = editor.opts.rtgOptions;
                     let grammar = opts.grammar || {};
@@ -163,7 +170,7 @@ require('style!css!./styles/froala-plugin-styles.css');
 
                 plugin.setState("loading");
                 if (window["Pwa"] && window["Pwa"].GrammarChecker){
-                    //plugin.activate();
+                    plugin.activate();
                     plugin.setState("connected");
                 }
                 else if (window["Pwa-plugins"]){
@@ -177,7 +184,7 @@ require('style!css!./styles/froala-plugin-styles.css');
 
                     plugin.loadScript(settings.service.sourcePath, ()=> {
                         window["Pwa-plugins"].forEach((p)=>{
-                            //p.activate();
+                            p.activate();
                             p.setState("connected");
                         });
                         window["Pwa-plugins"]=null;
@@ -256,6 +263,11 @@ require('style!css!./styles/froala-plugin-styles.css');
             },
             
             deactivate : ()=>{
+                console.log('Deactivating grammar checker');
+                var indexOf = checker.indexOf(plugin);
+                if (indexOf>=0){
+                    checker.splice(indexOf,1);
+                }
                 plugin.checker.deactivate();
                 plugin.checker.onConnectionChange = null;
                 plugin.setState("off");
