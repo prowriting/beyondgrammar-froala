@@ -103,6 +103,9 @@ require('style!css!./styles/froala-plugin-styles.css');
             var parentWidth = $btn.parent().width();
             if (rightSideOfMenu>parentWidth) {
                 var left = $btn.offset().left - $btn.parent().offset().left - ($dropdown.width() - $btn.outerWidth());
+                if (left<0){
+                    left=0;
+                }
                 $dropdown.hide();
                 setTimeout(()=> {
                     $dropdown.css('left', left + 'px');
