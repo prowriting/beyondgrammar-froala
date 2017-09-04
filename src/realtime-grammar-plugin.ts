@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.123/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.124/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
