@@ -77,25 +77,11 @@
     var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'rtg-switcher'];
     var buttonsSm = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', '|', 'rtg-switcher'];
     $(function () {
-        $('#contenteditable').froalaEditor({
+         $('#contenteditable, #contenteditable2').froalaEditor({
             toolbarButtons: buttons,
             toolbarButtonsMD: buttons,
-            toolbarButtonsSM: buttonsSm,
-            toolbarButtonsXS: buttonsSm,
-            height: 600,
-            spellcheck: false,
-            rtgOptions: {
-                languageFilter: ['en-US', 'en-GB'],
-                showContextThesaurus: true
-            },
-            rtgApiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
-        });
-
-        $('#contenteditable2').froalaEditor({
-            toolbarButtons: buttons,
-            toolbarButtonsMD: buttons,
-            toolbarButtonsSM: buttonsSm,
-            toolbarButtonsXS: buttonsSm,
+            toolbarButtonsSM: buttons,
+            toolbarButtonsXS: buttons,
             height: 600,
             spellcheck: false,
             rtgOptions: {
@@ -108,7 +94,6 @@
                 }
             }
         });
-
 
         $('#gethtml').on('click',function(){
             var html = $('#contenteditable').froalaEditor('html.get');
