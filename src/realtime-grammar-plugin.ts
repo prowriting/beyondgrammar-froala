@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.122/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.123/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -62,6 +62,15 @@ require('style!css!./styles/froala-plugin-styles.css');
                 c.setSettings(settings);
             });
             },
+        false);
+
+    window.addEventListener(
+        "pwa-dictionary-add",
+        (event) => {
+            checker.forEach((c)=>{
+                c.setSettings((<any>event).detail.word);
+            });
+        },
         false);
 
     // get the default language from the browser
@@ -217,22 +226,24 @@ require('style!css!./styles/froala-plugin-styles.css');
                     return;
                 }
 
-                if( val == "off" ) {
-                    var settings = plugin.checker.getSettings();
-                    // clone the settings
-                    settings = JSON.parse(JSON.stringify(settings));
-                    settings.checkerIsEnabled=false;
-                    plugin.checker.setSettings(settings);
-                } else {
-                    if( plugin.state == "off" ) {
-                        plugin.activate();
+                if (plugin.checker) {
+                    if (val == "off") {
+                        var settings = plugin.checker.getSettings();
+                        // clone the settings
+                        settings = JSON.parse(JSON.stringify(settings));
+                        settings.checkerIsEnabled = false;
+                        plugin.checker.setSettings(settings);
+                    } else {
+                        if (plugin.state == "off") {
+                            plugin.activate();
+                        }
+                        var settings = plugin.checker.getSettings();
+                        // clone the settings
+                        settings = JSON.parse(JSON.stringify(settings));
+                        settings.languageIsoCode = val;
+                        settings.checkerIsEnabled = true;
+                        plugin.checker.setSettings(settings);
                     }
-                    var settings = plugin.checker.getSettings();
-                    // clone the settings
-                    settings = JSON.parse(JSON.stringify(settings));
-                    settings.languageIsoCode=val;
-                    settings.checkerIsEnabled=true;
-                    plugin.checker.setSettings(settings);
                 }
                 language = val;
 
@@ -240,7 +251,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 var event = document.createEvent('CustomEvent');
 
 				// Define that the event name is 'build'.
-                console.log('Init language change event');
+                //console.log('Init language change event');
                 event.initCustomEvent('pwa-language-change', true, true, {
                     language: val
                 });
@@ -261,12 +272,25 @@ require('style!css!./styles/froala-plugin-styles.css');
                 plugin.checker.onConnectionChange = (status)=>{
                     plugin.setState(status);
                 };
-                
+
+                plugin.checker.onAddToDictionary = (word)=>{
+                    // we event it to other instances
+                    // Create the event.
+                    var event = document.createEvent('CustomEvent');
+
+                    // Define that the event name is 'build'.
+                    event.initCustomEvent('pwa-dictionary-add', true, true, {
+                        word: word
+                    });
+
+                    // target can be any Element or other EventTarget.
+                    window.dispatchEvent(event);
+                };
+
                 plugin.checker.init().then(()=>plugin.checker.activate());
             },
             
             deactivate : ()=>{
-                console.log('Deactivating grammar checker');
                 var indexOf = checker.indexOf(plugin);
                 if (indexOf>=0){
                     checker.splice(indexOf,1);
