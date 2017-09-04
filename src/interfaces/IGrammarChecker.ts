@@ -25,4 +25,6 @@ export interface IGrammarChecker {
     getVersionedApplicationName() : string;
     getCopyrightUrl() : string;
     getBrandImageUrl() : string;
+
+    addToDictionary(word: string);
 }
