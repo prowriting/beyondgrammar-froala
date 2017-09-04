@@ -214,22 +214,24 @@ require('style!css!./styles/froala-plugin-styles.css');
                     return;
                 }
 
-                if( val == "off" ) {
-                    var settings = plugin.checker.getSettings();
-                    // clone the settings
-                    settings = JSON.parse(JSON.stringify(settings));
-                    settings.checkerIsEnabled=false;
-                    plugin.checker.setSettings(settings);
-                } else {
-                    if( plugin.state == "off" ) {
-                        plugin.activate();
+                if (plugin.checker) {
+                    if (val == "off") {
+                        var settings = plugin.checker.getSettings();
+                        // clone the settings
+                        settings = JSON.parse(JSON.stringify(settings));
+                        settings.checkerIsEnabled = false;
+                        plugin.checker.setSettings(settings);
+                    } else {
+                        if (plugin.state == "off") {
+                            plugin.activate();
+                        }
+                        var settings = plugin.checker.getSettings();
+                        // clone the settings
+                        settings = JSON.parse(JSON.stringify(settings));
+                        settings.languageIsoCode = val;
+                        settings.checkerIsEnabled = true;
+                        plugin.checker.setSettings(settings);
                     }
-                    var settings = plugin.checker.getSettings();
-                    // clone the settings
-                    settings = JSON.parse(JSON.stringify(settings));
-                    settings.languageIsoCode=val;
-                    settings.checkerIsEnabled=true;
-                    plugin.checker.setSettings(settings);
                 }
                 language = val;
 
@@ -237,7 +239,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 var event = document.createEvent('CustomEvent');
 
 				// Define that the event name is 'build'.
-                console.log('Init language change event');
+                //console.log('Init language change event');
                 event.initCustomEvent('pwa-language-change', true, true, {
                     language: val
                 });
