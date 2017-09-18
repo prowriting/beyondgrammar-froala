@@ -38,12 +38,21 @@ notifications:
   on_build_status_changed: false
   
 deploy:
-  provider: AzureBlob
+  -provider: AzureBlob
   storage_account_name: prowritingaid
   storage_access_key: 
     secure: gzyqglVhkink16D5LDmANUnHDoe/yvOCDWr79JlBDX5pSf6ewKBwGr1ttNd0a08+J/rQbyEmXw8mLxDLoBJwrFxYqsZQIMEhcR7chDy5p2aNK+wA5IxmI2NFwtW8LaWb
   container: cdn
   folder: $(APPVEYOR_PROJECT_SLUG)\$(APPVEYOR_BUILD_VERSION)
   artifact: dist/realtime-grammar-plugin.js
+  unzip: false
+  set_content_type:  true
+  -provider: AzureBlob
+  storage_account_name: prowritingaid
+  storage_access_key: 
+    secure: gzyqglVhkink16D5LDmANUnHDoe/yvOCDWr79JlBDX5pSf6ewKBwGr1ttNd0a08+J/rQbyEmXw8mLxDLoBJwrFxYqsZQIMEhcR7chDy5p2aNK+wA5IxmI2NFwtW8LaWb
+  container: cdn
+  folder: $(APPVEYOR_PROJECT_SLUG)\$(APPVEYOR_BUILD_VERSION)
+  artifact: dist/froala.html
   unzip: false
   set_content_type:  true
