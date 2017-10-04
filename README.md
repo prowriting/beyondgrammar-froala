@@ -1,4 +1,4 @@
-# Real-time Grammar plugin for Froala editor
+# BeyondGrammar plugin for Froala editor
 Bring real-time spelling, grammar and style checking into your Froala editor. Perfect for CMSs, help desk systems and blogs.
 
 To add real-time grammar, spell and style checking to your Froala editor you just need to install this add-in. It's free for individuals and reasonably proced for multi-user licenses.

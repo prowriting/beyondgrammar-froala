@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ProWritingAid - Realtime Grammar Checking for Froala</title>
+    <title>ProWritingAid - BeyondGrammar Checking for Froala</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -76,13 +76,13 @@
     <!-- Include Editor JS files. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.4/js/froala_editor.pkgd.min.js"></script>
 
-    <script src="realtime-grammar-plugin.js"></script>
+    <script src="beyond-grammar-plugin.js"></script>
 
     <!-- Initialize the editor. -->
     <script>
         //$.FroalaEditor.DEFAULTS.
-        var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'rtg-switcher'];
-        var buttonsSm = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', '|', 'rtg-switcher'];
+        var buttons = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertLink', 'undo', 'redo', 'quote', 'fullscreen', 'html', '|', 'beyond-grammar-switcher'];
+        var buttonsSm = ['paragraphFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL', '|', 'beyond-grammar-switcher'];
         $(function () {
             $('#contenteditable, #contenteditable2').froalaEditor({
                 toolbarButtons: buttons,
@@ -91,7 +91,7 @@
                 toolbarButtonsXS: buttons,
                 height: 600,
                 spellcheck: false,
-                rtgOptions: {
+                bgOptions: {
                     service: {
                         apiKey: 'E8FEF7AE-3F36-4EAF-A451-456D05E6F2A3'
                     },

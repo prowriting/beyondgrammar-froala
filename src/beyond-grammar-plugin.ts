@@ -34,7 +34,7 @@ require('style!css!./styles/froala-plugin-styles.css');
             languages
                 .forEach((lang)=> {
                 var bullet = lang.isoCode == language ? ' •' : '';
-                html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="' + lang.isoCode + '" title="' + lang.displayName + '" aria-selected="false">' + lang.displayName + bullet + '</a></li>';
+                html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="beyond-grammar-switcher" data-param1="' + lang.isoCode + '" title="' + lang.displayName + '" aria-selected="false">' + lang.displayName + bullet + '</a></li>';
             });
         }else{
             console.log('No languages available');
@@ -43,7 +43,7 @@ require('style!css!./styles/froala-plugin-styles.css');
         if (!settings.hideDisable) {
             // add a disable checking option
             var offBullet = "off" == language ? ' •' : '';
-            html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="rtg-switcher" data-param1="off" title="No Checking" aria-selected="false">No Checking' + offBullet + '</a></li>';
+            html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="beyond-grammar-switcher" data-param1="off" title="No Checking" aria-selected="false">No Checking' + offBullet + '</a></li>';
         }
         html+='</ul>'
         return html;
@@ -79,12 +79,12 @@ require('style!css!./styles/froala-plugin-styles.css');
     let language = browserLanguage=="en-GB"?'en-GB':'en-US';
     let checker = [];
 
-    $.FroalaEditor.DefineIconTemplate('rtg', '<i class="rtg-toolbar-icon"></i>');
-    $.FroalaEditor.DefineIcon('rtg-icon', { NAME: 'icon', template : "rtg"});
-    $.FroalaEditor.RegisterCommand('rtg-switcher', {
-        title: 'Real-time Grammar Checking',
+    $.FroalaEditor.DefineIconTemplate('beyond-grammar', '<i class="beyond-grammar-toolbar-icon"></i>');
+    $.FroalaEditor.DefineIcon('beyond-grammar-icon', { NAME: 'icon', template : "beyond-grammar"});
+    $.FroalaEditor.RegisterCommand('beyond-grammar-switcher', {
+        title: 'BeyondGrammar Checking',
         type: 'dropdown',
-        icon: 'rtg-icon',
+        icon: 'beyond-grammar-icon',
         focus: false,
         undo: false,
         refreshAfterCallback: true,
@@ -124,13 +124,13 @@ require('style!css!./styles/froala-plugin-styles.css');
         }
     });
 	
-    $.FroalaEditor.PLUGINS.RealtimeGrammarPlugin = function (editor){
+    $.FroalaEditor.PLUGINS.BeyondGrammarPlugin = function (editor){
         let states = [ "loading", "connected", "disconnected", "off" ];        
         let labelsByState = {
-            "loading" : "Real-time Grammar is loading",
-            "connected" : "Real-time Grammar is online (click to change language)",
-            "disconnected" : "Real-time Grammar is offline (click to start)",
-            "off" : "Real-time Grammar is stopped (click to change language)"
+            "loading" : "BeyondGrammar is loading",
+            "connected" : "BeyondGrammar is online (click to change language)",
+            "disconnected" : "BeyondGrammar is offline (click to start)",
+            "off" : "BeyondGrammar is stopped (click to change language)"
         };
         
         let plugin = {
@@ -144,8 +144,8 @@ require('style!css!./styles/froala-plugin-styles.css');
                 }
                 //console.log('Starting froala on element: '+editor.$el.attr('name'));
 
-                if (editor.opts && editor.opts.rtgOptions){
-                    let opts = editor.opts.rtgOptions;
+                if (editor.opts && editor.opts.bgOptions){
+                    let opts = editor.opts.bgOptions;
                     let grammar = opts.grammar || {};
                     let service = opts.service || {};
                     
@@ -205,7 +205,7 @@ require('style!css!./styles/froala-plugin-styles.css');
             },
             
             onRefreshButton : ($btn)=>{
-                $btn.find(".rtg-toolbar-icon").removeClass(states.join(" ")).addClass(plugin.state);
+                $btn.find(".beyond-grammar-toolbar-icon").removeClass(states.join(" ")).addClass(plugin.state);
                 $btn.data("title", labelsByState[plugin.state]);
             },
             
@@ -313,8 +313,8 @@ require('style!css!./styles/froala-plugin-styles.css');
             }
         };
 
-        $.FroalaEditor.COMMANDS["rtg-switcher"].callback = (cmd,val)=>plugin.onLanguageOptionClick(cmd,val);
-        $.FroalaEditor.COMMANDS["rtg-switcher"].refresh = ($btn)=>plugin.onRefreshButton($btn);
+        $.FroalaEditor.COMMANDS["beyond-grammar-switcher"].callback = (cmd,val)=>plugin.onLanguageOptionClick(cmd,val);
+        $.FroalaEditor.COMMANDS["beyond-grammar-switcher"].refresh = ($btn)=>plugin.onRefreshButton($btn);
         
         return plugin
     };

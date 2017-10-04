@@ -1,4 +1,4 @@
-.rtg-toolbar-icon{
+.beyond-grammar-toolbar-icon{
   width: 16px !important;
   height: 16px !important;
   background-size: 16px 16px !important;
@@ -6,21 +6,21 @@
   position: relative;
 }
 
-.rtg-toolbar-icon.loading, .rtg-toolbar-icon.disconnected {
-  animation: realtime-grammar-toolbar-icon-loading-animation 1s ease infinite;
+.beyond-grammar-toolbar-icon.loading, .beyond-grammar-toolbar-icon.disconnected {
+  animation: beyond-grammar-toolbar-icon-loading-animation 1s ease infinite;
 }
 
-.rtg-toolbar-icon.connected{
+.beyond-grammar-toolbar-icon.connected{
   background: url(../icons/realtime-logo-black-16.png) no-repeat 0 0 !important;
 }
 
-.rtg-toolbar-icon.off{
+.beyond-grammar-toolbar-icon.off{
     opacity: 0.5;
 }
 
 
 
-@keyframes realtime-grammar-toolbar-icon-loading-animation {
+@keyframes beyond-grammar-toolbar-icon-loading-animation {
   0%, 100%{
     opacity: 0.8;
     transform: scale(0.9);
