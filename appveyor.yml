@@ -26,7 +26,7 @@ build_script:
   - npm run build:CI  
   
 artifacts:
-  - path: dist/beyondgrammar-plugin.js
+  - path: dist/beyond-grammar-plugin.js
   - path: dist/froala.html
 
 notifications:
