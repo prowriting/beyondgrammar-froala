@@ -34,7 +34,7 @@ require('style!css!./styles/froala-plugin-styles.css');
             languages
                 .forEach((lang)=> {
                 var bullet = lang.isoCode == language ? ' •' : '';
-                html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="beyond-grammar-switcher" data-param1="' + lang.isoCode + '" title="' + lang.displayName + '" aria-selected="false">' + lang.displayName + bullet + '</a></li>';
+                html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="BeyondGrammar" data-param1="' + lang.isoCode + '" title="' + lang.displayName + '" aria-selected="false">' + lang.displayName + bullet + '</a></li>';
             });
         }else{
             console.log('No languages available');
@@ -43,7 +43,7 @@ require('style!css!./styles/froala-plugin-styles.css');
         if (!settings.hideDisable) {
             // add a disable checking option
             var offBullet = "off" == language ? ' •' : '';
-            html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="beyond-grammar-switcher" data-param1="off" title="No Checking" aria-selected="false">No Checking' + offBullet + '</a></li>';
+            html += '<li role="presentation"><a class="fr-command" tabindex="-1" role="option" data-cmd="BeyondGrammar" data-param1="off" title="No Checking" aria-selected="false">No Checking' + offBullet + '</a></li>';
         }
         html+='</ul>'
         return html;
@@ -81,7 +81,7 @@ require('style!css!./styles/froala-plugin-styles.css');
 
     $.FroalaEditor.DefineIconTemplate('beyond-grammar', '<i class="beyond-grammar-toolbar-icon"></i>');
     $.FroalaEditor.DefineIcon('beyond-grammar-icon', { NAME: 'icon', template : "beyond-grammar"});
-    $.FroalaEditor.RegisterCommand('beyond-grammar-switcher', {
+    $.FroalaEditor.RegisterCommand('BeyondGrammar', {
         title: 'BeyondGrammar Checking',
         type: 'dropdown',
         icon: 'beyond-grammar-icon',
@@ -313,8 +313,8 @@ require('style!css!./styles/froala-plugin-styles.css');
             }
         };
 
-        $.FroalaEditor.COMMANDS["beyond-grammar-switcher"].callback = (cmd,val)=>plugin.onLanguageOptionClick(cmd,val);
-        $.FroalaEditor.COMMANDS["beyond-grammar-switcher"].refresh = ($btn)=>plugin.onRefreshButton($btn);
+        $.FroalaEditor.COMMANDS["BeyondGrammar"].callback = (cmd,val)=>plugin.onLanguageOptionClick(cmd,val);
+        $.FroalaEditor.COMMANDS["BeyondGrammar"].refresh = ($btn)=>plugin.onRefreshButton($btn);
         
         return plugin
     };
