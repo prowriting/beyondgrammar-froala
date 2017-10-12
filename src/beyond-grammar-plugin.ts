@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/beyondgrammar/1.0.139/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/beyondgrammar/1.0.141/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -172,10 +172,19 @@ require('style!css!./styles/froala-plugin-styles.css');
                     $html.find('.pwa-mark,.pwa-mark-done').contents().unwrap();
                     return $html.html();
                 });
-
+                
+                editor.events.on("commands.before", (command)=>{
+                    //before code view is switched on
+                    if(command == "html" && !editor.codeView.isActive()){
+                        plugin.checker.unbindChangeEvents();
+                    }
+                });
+                
                 editor.events.on('commands.after', (command) => {
-                    if (command == 'html'){
+                    //right after codeview is switched off
+                    if (command == 'html' && !editor.codeView.isActive()){
                         // force a check in case they've just returned from code view
+                        plugin.checker.bindChangeEvents();
                         plugin.checker.checkAll();
                     }
                 });
