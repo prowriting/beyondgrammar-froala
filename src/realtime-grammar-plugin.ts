@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowriting.azureedge.net/realtimegrammar/1.0.133/dist/bundle.js",
+            sourcePath : "//prowriting.azureedge.net/beyondgrammar/default/dist/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
@@ -181,7 +181,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                 });
 
                 plugin.setState("loading");
-                if (window["Pwa"] && window["Pwa"].GrammarChecker){
+                if (window["BeyondGrammar"] && window["BeyondGrammar"].GrammarChecker){
                     plugin.activate();
                     plugin.setState("connected");
                 }
@@ -264,7 +264,7 @@ require('style!css!./styles/froala-plugin-styles.css');
             activate : ()=>{
                 plugin.setState("loading");
 
-                plugin.checker = new window["Pwa"].GrammarChecker(editor.$el[0], settings.service);
+                plugin.checker = new window["BeyondGrammar"].GrammarChecker(editor.$el[0], settings.service);
 
                 plugin.checker.setSettings(settings.grammar);
                 checker.push(plugin.checker);
