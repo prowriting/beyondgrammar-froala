@@ -173,9 +173,18 @@ require('style!css!./styles/froala-plugin-styles.css');
                     return $html.html();
                 });
 
+                editor.events.on("commands.before", (command)=>{
+                    //before code view is switched on
+                    if(command == "html" && !editor.codeView.isActive()){
+                        plugin.checker.unbindChangeEvents();
+                    }
+                });
+
                 editor.events.on('commands.after', (command) => {
-                    if (command == 'html'){
+                    //right after codeview is switched off
+                    if (command == 'html' && !editor.codeView.isActive()){
                         // force a check in case they've just returned from code view
+                        plugin.checker.bindChangeEvents();
                         plugin.checker.checkAll();
                     }
                 });
