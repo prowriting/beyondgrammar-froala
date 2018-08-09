@@ -5,7 +5,7 @@ require('style!css!./styles/froala-plugin-styles.css');
     let settings = {
         service : {
             i18n : { en : "./libs/i18n-en.js" },
-            sourcePath : "//prowritingaid.blob.core.windows.net/cdn/beyondgrammar/release/dist/hayt/bundle.js",
+            sourcePath : "//cdn.prowritingaid.com/beyondgrammar/release/dist/hayt/bundle.js",
             userId : null,
             apiKey : null,
             serviceUrl: "//rtg.prowritingaid.com"
