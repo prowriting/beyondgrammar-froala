@@ -16,7 +16,8 @@ require('style!css!./styles/froala-plugin-styles.css');
             checkStyle: true,
             checkSpelling: true,
             checkGrammar: true,
-            checkerIsEnabled: true
+            checkerIsEnabled: true,
+            heavyGrammar: true
         },
         hideDisable: false
     };
@@ -154,7 +155,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                         grammar.languageIsoCode = language;
                     }
 
-                    settings.grammar = grammar;
+                    settings.grammar = { heavyGrammar: true, ...grammar };
 
                     //Service options applying
                     settings.service.sourcePath = service.sourcePath || settings.service.sourcePath;
