@@ -155,7 +155,7 @@ require('style!css!./styles/froala-plugin-styles.css');
                         grammar.languageIsoCode = language;
                     }
 
-                    settings.grammar = { heavyGrammar: true, ...grammar };
+                    settings.grammar = { ...grammar, heavyGrammar: true };
 
                     //Service options applying
                     settings.service.sourcePath = service.sourcePath || settings.service.sourcePath;
