@@ -27,6 +27,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: './src/froala.html', to: './' },
+            { from: './src/froala3.html', to: './' },
             { context : './src', from: {glob : './icons/**/*'}, to:'./' },
         ])
     ],
